@@ -3,26 +3,26 @@
     <div class="tabs_bar">
       <b-tabs content-class="mt-3" align="center" pills>
         <b-tab title="Web" active>
-          <UnfinishedBoard :title="'Unfinished'" :status="false" />
-          <FinishBoard :title="'Finish'" :status="true" />
+          <UnfinishedBoard
+            :title="'Unfinished'"
+            :status="false"
+            :ironmanData="ironmanData"
+          />
+          <FinishBoard
+            :title="'Finish'"
+            :status="true"
+            :ironmanData="ironmanData"
+          />
         </b-tab>
-        <b-tab title="Backend">
-          <UnfinishedBoard :title="'Unfinished'" :status="false" />
-          <FinishBoard :title="'Finish'" :status="true" />
-        </b-tab>
-        <b-tab title="Android">
-          <UnfinishedBoard :title="'Unfinished'" :status="false" />
-          <FinishBoard :title="'Finish'" :status="true" />
-        </b-tab>
-        <b-tab title="iOS">
-          <UnfinishedBoard :title="'Unfinished'" :status="false" />
-          <FinishBoard :title="'Finish'" :status="true" />
-        </b-tab>
+        <b-tab title="Backend"> </b-tab>
+        <b-tab title="Android"> </b-tab>
+        <b-tab title="iOS"> </b-tab>
       </b-tabs>
     </div>
   </div>
 </template>
 <script>
+import ironmanData from "@/data/ironmanData.json";
 import FinishBoard from "@/components/FinishBoard.vue";
 import UnfinishedBoard from "@/components/UnfinishedBoard.vue";
 
@@ -33,16 +33,23 @@ export default {
     UnfinishedBoard,
   },
   data() {
-    return {};
+    return {
+      ironmanData,
+    };
   },
 };
 </script>
 <style lang="scss" scoped>
 .tab-content > .active {
-  padding: 45px;
+  padding: 30px 16px;
   display: flex;
-  gap: 16px;
+  flex-direction: column;
   background-color: #f2f2f2;
+  @include media(md) {
+    padding: 45px;
+    flex-direction: row;
+    gap: 16px;
+  }
 }
 
 ::v-deep .nav-link {

@@ -1,7 +1,9 @@
 <template>
   <div class="FinishBoard">
     <h3>{{ title }}</h3>
-    <TaskCard v-if="status" />
+    <div v-for="(row, index) in ironmanData" :key="index">
+      <TaskCard v-if="status" :memberInfo="row" />
+    </div>
   </div>
 </template>
 <script>
@@ -19,6 +21,10 @@ export default {
     status: {
       required: true,
       type: Boolean,
+    },
+    ironmanData: {
+      required: true,
+      type: Array,
     },
   },
   data() {
