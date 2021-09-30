@@ -1,28 +1,34 @@
 <template>
   <div class="TabsBar">
+    <!-- {{ webCampInfo }} -->
     <div class="tabs_bar">
       <b-tabs content-class="mt-3" align="center" pills>
         <b-tab title="Web" active>
+          <UnfinishedBoard :title="'Unfinished'" :ironmanData="webCampInfo" />
+          <FinishBoard :title="'Finish'" :ironmanData="webCampInfo" />
+        </b-tab>
+        <b-tab title="Backend">
           <UnfinishedBoard
             :title="'Unfinished'"
-            :status="false"
-            :ironmanData="ironmanData"
+            :ironmanData="backendCampInfo" />
+          <FinishBoard :title="'Finish'" :ironmanData="backendCampInfo"
+        /></b-tab>
+        <b-tab title="iOS">
+          <UnfinishedBoard :title="'Unfinished'" :ironmanData="iOSCampInfo" />
+          <FinishBoard :title="'Finish'" :ironmanData="iOSCampInfo"
+        /></b-tab>
+        <b-tab title="Android">
+          <UnfinishedBoard
+            :title="'Unfinished'"
+            :ironmanData="androidCampInfo"
           />
-          <FinishBoard
-            :title="'Finish'"
-            :status="true"
-            :ironmanData="ironmanData"
-          />
+          <FinishBoard :title="'Finish'" :ironmanData="androidCampInfo" />
         </b-tab>
-        <b-tab title="Backend"> </b-tab>
-        <b-tab title="Android"> </b-tab>
-        <b-tab title="iOS"> </b-tab>
       </b-tabs>
     </div>
   </div>
 </template>
 <script>
-import ironmanData from "@/data/ironmanData.json";
 import FinishBoard from "@/components/FinishBoard.vue";
 import UnfinishedBoard from "@/components/UnfinishedBoard.vue";
 
@@ -34,8 +40,30 @@ export default {
   },
   data() {
     return {
-      ironmanData,
+      webCampInfo: [],
+      backendCampInfo: [],
+      iOSCampInfo: [],
+      androidCampInfo: [],
     };
+  },
+  created() {
+    this.webCampInfo = this.contestantInfo.filter(
+      (info) => info.camp === "Web"
+    );
+    this.backendCampInfo = this.contestantInfo.filter(
+      (info) => info.camp === "Backend"
+    );
+    this.iOSCampInfo = this.contestantInfo.filter(
+      (info) => info.camp === "iOS"
+    );
+    this.androidCampInfo = this.contestantInfo.filter(
+      (info) => info.camp === "Android"
+    );
+  },
+  computed: {
+    contestantInfo() {
+      return this.$store.getters.contestantInfo;
+    },
   },
 };
 </script>

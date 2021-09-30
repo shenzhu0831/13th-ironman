@@ -1,10 +1,15 @@
 <template>
   <div class="UnfinishedBoard">
     <h3>{{ title }}</h3>
-    <TaskCard v-if="status" />
+    <div v-for="(row, index) in ironmanData" :key="index">
+      <TaskCard v-if="!checkPostTime(row.time)" :memberInfo="row" />
+    </div>
   </div>
 </template>
 <script>
+import dayjs from "dayjs";
+import isToday from "dayjs/plugin/isToday";
+
 import TaskCard from "@/components/TaskCard.vue";
 export default {
   name: "UnfinishedBoard",
@@ -16,13 +21,21 @@ export default {
       required: true,
       type: String,
     },
-    status: {
+    ironmanData: {
       required: true,
-      type: Boolean,
+      type: Array,
     },
   },
   data() {
     return {};
+  },
+  methods: {
+    checkPostTime(time) {
+      const now = dayjs();
+      dayjs.extend(isToday);
+      const test = dayjs(time).isToday(now, "day");
+      return test;
+    },
   },
 };
 </script>
