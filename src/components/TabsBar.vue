@@ -89,5 +89,8 @@ export default {
 
 ::v-deep .nav-pills .nav-link.active {
   background-color: #7dd69c;
+  &:hover {
+    color: #fff;
+  }
 }
 </style>
