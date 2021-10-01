@@ -164,6 +164,9 @@ export default {
     svg {
       height: 100%;
       fill: #7dd69c;
+      &:hover {
+        fill: #1da16f;
+      }
     }
   }
 }

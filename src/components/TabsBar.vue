@@ -82,7 +82,7 @@ export default {
 ::v-deep .nav-link {
   color: #7dd69c;
   &:hover {
-    color: #7dd69c;
+    color: #1da16f;
   }
 }
 

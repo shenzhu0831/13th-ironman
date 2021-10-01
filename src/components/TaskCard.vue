@@ -12,7 +12,7 @@
         </a>
       </div>
       <div class="post_info">
-        <span class="post_time">最後發文日期： {{ memberInfo.time }}</span>
+        <span class="post_time">最後發文時間： {{ memberInfo.time }}</span>
         <span class="post_release">
           累積貼文數：{{ memberInfo.releasePost }} 篇
         </span>
@@ -86,6 +86,9 @@ export default {
   &_title {
     color: #7dd69c;
     word-break: break-all;
+    &:hover {
+      color: #1da16f;
+    }
   }
 }
 
