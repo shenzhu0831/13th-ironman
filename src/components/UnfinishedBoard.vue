@@ -33,8 +33,8 @@ export default {
     checkPostTime(time) {
       const now = dayjs();
       dayjs.extend(isToday);
-      const test = dayjs(time).isToday(now, "day");
-      return test;
+      const donePost = dayjs(time).isToday(now, "day");
+      return donePost;
     },
   },
 };
