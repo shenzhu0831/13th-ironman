@@ -1,6 +1,5 @@
 <template>
   <div class="TabsBar">
-    <!-- {{ webCampInfo }} -->
     <div class="tabs_bar">
       <b-tabs content-class="mt-3" align="center" pills>
         <b-tab title="Web" active>
