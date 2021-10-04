@@ -1,5 +1,6 @@
 <template>
   <div class="TabsBar">
+    <!-- <button @click="shuffle">shuffle</button> -->
     <div class="tabs_bar">
       <b-tabs content-class="mt-3" align="center" pills>
         <b-tab title="Web">
@@ -38,7 +39,9 @@ export default {
     UnfinishedBoard,
   },
   data() {
-    return {};
+    return {
+      items: [],
+    };
   },
   computed: {
     contestantInfo() {

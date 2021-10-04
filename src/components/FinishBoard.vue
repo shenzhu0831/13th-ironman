@@ -1,9 +1,11 @@
 <template>
   <div class="FinishBoard">
     <h3>{{ title }}</h3>
-    <div v-for="(row, index) in ironmanData" :key="index">
-      <TaskCard v-if="checkPostTime(row.time)" :memberInfo="row" />
-    </div>
+    <transition-group name="cell" tag="div">
+      <div v-for="(row, index) in ironmanData" :key="index">
+        <TaskCard v-if="checkPostTime(row.time)" :memberInfo="row" />
+      </div>
+    </transition-group>
   </div>
 </template>
 <script>
@@ -45,5 +47,24 @@ export default {
   h3 {
     color: #63677f;
   }
+}
+
+.cell {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid #aaa;
+  margin-right: -1px;
+  margin-bottom: -1px;
+}
+
+.cell:nth-child(3n) {
+  margin-right: 0;
+}
+.cell:nth-child(27n) {
+  margin-bottom: 0;
+}
+.cell-move {
+  transition: transform 1s;
 }
 </style>

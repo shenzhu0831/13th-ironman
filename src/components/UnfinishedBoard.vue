@@ -1,10 +1,9 @@
 <template>
   <div class="UnfinishedBoard">
     <h3>{{ title }}</h3>
-    <button @click="shuffle">Shuffle</button>
-    <transition-group name="list" tag="div">
-      <div v-for="(row, index) in items" :key="index">
-        <TaskCard :memberInfo="row" />
+    <transition-group name="cell" tag="div">
+      <div name="cell" v-for="row in items" :key="row.name">
+        <TaskCard v-if="!checkPostTime(row.time)" :memberInfo="row" />
       </div>
     </transition-group>
   </div>
@@ -34,6 +33,9 @@ export default {
       items: [],
     };
   },
+  mounted() {
+    this.items = this.ironmanData;
+  },
   methods: {
     checkPostTime(time) {
       const now = dayjs();
@@ -41,9 +43,9 @@ export default {
       const donePost = dayjs(time).isToday(now, "day");
       return donePost;
     },
-    shuffle() {
-      this.items = this.ironmanData.sort(() => Math.random() - 0.5);
-    },
+    // shuffle() {
+    //   this.items = this.ironmanData.sort(() => Math.random() - 0.5);
+    // },
   },
 };
 </script>
@@ -54,7 +56,30 @@ export default {
     color: #63677f;
   }
 }
-.flip-list-move {
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  // width: 500px;
+  margin-top: 10px;
+}
+
+.cell {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid #aaa;
+  margin-right: -1px;
+  margin-bottom: -1px;
+}
+
+.cell:nth-child(3n) {
+  margin-right: 0;
+}
+.cell:nth-child(27n) {
+  margin-bottom: 0;
+}
+.cell-move {
   transition: transform 1s;
 }
 </style>
