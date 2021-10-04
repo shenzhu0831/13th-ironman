@@ -2,7 +2,7 @@
   <div class="TabsBar">
     <div class="tabs_bar">
       <b-tabs content-class="mt-3" align="center" pills>
-        <b-tab title="Web" active>
+        <b-tab title="Web">
           <UnfinishedBoard :title="'Unfinished'" :ironmanData="webCampInfo" />
           <FinishBoard :title="'Finish'" :ironmanData="webCampInfo" />
         </b-tab>
@@ -38,30 +38,23 @@ export default {
     UnfinishedBoard,
   },
   data() {
-    return {
-      webCampInfo: [],
-      backendCampInfo: [],
-      iOSCampInfo: [],
-      androidCampInfo: [],
-    };
-  },
-  created() {
-    this.webCampInfo = this.contestantInfo.filter(
-      (info) => info.camp === "Web"
-    );
-    this.backendCampInfo = this.contestantInfo.filter(
-      (info) => info.camp === "Backend"
-    );
-    this.iOSCampInfo = this.contestantInfo.filter(
-      (info) => info.camp === "iOS"
-    );
-    this.androidCampInfo = this.contestantInfo.filter(
-      (info) => info.camp === "Android"
-    );
+    return {};
   },
   computed: {
     contestantInfo() {
       return this.$store.getters.contestantInfo;
+    },
+    webCampInfo() {
+      return this.$store.getters.webCampInfo;
+    },
+    backendCampInfo() {
+      return this.$store.getters.backendCampInfo;
+    },
+    iOSCampInfo() {
+      return this.$store.getters.iOSCampInfo;
+    },
+    androidCampInfo() {
+      return this.$store.getters.androidCampInfo;
     },
   },
 };
