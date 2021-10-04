@@ -13,6 +13,8 @@ Vue.use(IconsPlugin);
 // sass style
 import "./assets/sass/reset.scss";
 
+import "./assets/css/dark-mode.css";
+
 Vue.config.productionTip = false;
 
 new Vue({

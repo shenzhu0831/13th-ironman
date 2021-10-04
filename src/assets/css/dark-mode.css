@@ -1,0 +1,16 @@
+:root.dark_theme {
+  --color-text: #f2f2f2;
+  --color-background: #18202a;
+  --tab-content: #394c63;
+}
+
+:root {
+  --color-text: #222222;
+  --color-background: #fff;
+  --tab-content: #f2f2f2;
+}
+
+html {
+  background-color: var(--color-background);
+  color: var(--color-text);
+}

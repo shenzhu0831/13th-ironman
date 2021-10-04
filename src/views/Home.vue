@@ -171,45 +171,28 @@ export default {
   }
 }
 </style>
-<style>
-:root.dark_theme {
-  --color-text: #f2f2f2;
-  --color-background: #18202a;
-  --tab-content: #394c63;
-}
-
-:root {
-  --color-text: #222222;
-  --color-background: #fff;
-  --tab-content: #f2f2f2;
-}
-
-html {
-  background-color: var(--color-background);
+<style lang="css" scoped>
+::v-deep .header .title span:first-of-type {
   color: var(--color-text);
 }
 
-.header .title span:first-of-type {
-  color: var(--color-text) !important;
+::v-deep .tab-content > .active {
+  background-color: var(--tab-content);
 }
 
-.tab-content > .active {
-  background-color: var(--tab-content) !important;
+::v-deep .FinishBoard h3 {
+  color: var(--color-text);
 }
 
-.FinishBoard h3 {
-  color: var(--color-text) !important;
+::v-deep .UnfinishedBoard h3 {
+  color: var(--color-text);
 }
 
-.UnfinishedBoard h3 {
-  color: var(--color-text) !important;
+::v-deep .TaskCard {
+  background-color: var(--color-background);
 }
 
-.TaskCard {
-  background-color: var(--color-background) !important;
-}
-
-.member_name {
-  color: var(--color-text) !important;
+::v-deep .member_name {
+  color: var(--color-text);
 }
 </style>
