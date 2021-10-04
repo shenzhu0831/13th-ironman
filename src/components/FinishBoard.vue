@@ -42,7 +42,6 @@ export default {
 <style lang="scss" scoped>
 .FinishBoard {
   flex: 1 0 0;
-  min-height: 100vh;
   h3 {
     color: #63677f;
   }

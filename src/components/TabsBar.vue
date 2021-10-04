@@ -68,6 +68,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .tab-content > .active {
+  min-height: 100vh;
   padding: 30px 16px;
   display: flex;
   flex-direction: column;
