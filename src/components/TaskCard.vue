@@ -7,7 +7,7 @@
       <div class="member_post">
         <p class="member_name">{{ memberInfo.name }}</p>
         <p class="member_theme">{{ memberInfo.theme }}</p>
-        <a class="member_title" :href="memberInfo.href">
+        <a class="member_title" :href="memberInfo.href" target="_blank">
           {{ memberInfo.title }}
         </a>
       </div>
