@@ -18,19 +18,29 @@
           <UnfinishedBoard :title="'Unfinished'" :ironmanData="androidData" />
           <FinishBoard :title="'Finish'" :ironmanData="androidData" />
         </b-tab>
+        <div class="animation_control">
+          <Firework v-if="showFirework" />
+          <button @click="showFirework = true" class="firework_button">
+            Firework
+          </button>
+        </div>
       </b-tabs>
     </div>
   </div>
 </template>
 <script>
+import dayjs from "dayjs";
+
 import FinishBoard from "@/components/FinishBoard.vue";
 import UnfinishedBoard from "@/components/UnfinishedBoard.vue";
+import Firework from "@/components/Firework.vue";
 
 export default {
   name: "TabsBar",
   components: {
     FinishBoard,
     UnfinishedBoard,
+    Firework,
   },
   data() {
     return {
@@ -38,12 +48,14 @@ export default {
       backendData: [],
       iOSData: [],
       androidData: [],
+      showFirework: false,
     };
   },
   mounted() {
     this.webData = this.webCampInfo;
     this.backendData = this.backendCampInfo;
     this.iOSData = this.iOSCampInfo;
+    this.showFirework = dayjs().isSame("2021-10-17", "day");
   },
   computed: {
     webCampInfo() {
@@ -81,7 +93,6 @@ export default {
   padding: 30px 16px;
   display: flex;
   flex-direction: column;
-  background-color: #f2f2f2;
   @include media(md) {
     padding: 45px;
     flex-direction: row;
@@ -99,6 +110,18 @@ export default {
 ::v-deep .nav-pills .nav-link.active {
   background-color: #7dd69c;
   &:hover {
+    color: #fff;
+  }
+}
+
+.animation_control {
+  padding: 0 45px 45px;
+  .firework_button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #7dd69c;
+    box-shadow: 1px 1px 3px 0 rgba($color: #808080, $alpha: 0.3);
     color: #fff;
   }
 }

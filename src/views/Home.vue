@@ -176,7 +176,7 @@ export default {
   color: var(--color-text);
 }
 
-::v-deep .tab-content > .active {
+::v-deep .tab-content {
   background-color: var(--tab-content);
 }
 
