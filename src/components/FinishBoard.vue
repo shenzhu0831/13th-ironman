@@ -1,8 +1,8 @@
 <template>
   <div class="FinishBoard">
     <h3>{{ title }}</h3>
-    <transition-group name="cell" tag="div">
-      <div v-for="(row, index) in ironmanData" :key="index">
+    <transition-group name="flip-list" tag="div">
+      <div v-for="row in ironmanData" :key="row.name">
         <TaskCard v-if="checkPostTime(row.time)" :memberInfo="row" />
       </div>
     </transition-group>
@@ -29,7 +29,12 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      items: [],
+    };
+  },
+  mounted() {
+    this.items = this.ironmanData;
   },
   methods: {
     checkPostTime(time) {
@@ -49,22 +54,7 @@ export default {
   }
 }
 
-.cell {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border: 1px solid #aaa;
-  margin-right: -1px;
-  margin-bottom: -1px;
-}
-
-.cell:nth-child(3n) {
-  margin-right: 0;
-}
-.cell:nth-child(27n) {
-  margin-bottom: 0;
-}
-.cell-move {
+.flip-list-move {
   transition: transform 1s;
 }
 </style>

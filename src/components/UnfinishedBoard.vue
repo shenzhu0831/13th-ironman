@@ -1,8 +1,8 @@
 <template>
   <div class="UnfinishedBoard">
     <h3>{{ title }}</h3>
-    <transition-group name="cell" tag="div">
-      <div name="cell" v-for="row in items" :key="row.name">
+    <transition-group name="flip-list" tag="div">
+      <div class="flip-list-move" v-for="row in ironmanData" :key="row.name">
         <TaskCard v-if="!checkPostTime(row.time)" :memberInfo="row" />
       </div>
     </transition-group>
@@ -43,9 +43,6 @@ export default {
       const donePost = dayjs(time).isToday(now, "day");
       return donePost;
     },
-    // shuffle() {
-    //   this.items = this.ironmanData.sort(() => Math.random() - 0.5);
-    // },
   },
 };
 </script>
@@ -57,29 +54,7 @@ export default {
   }
 }
 
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  // width: 500px;
-  margin-top: 10px;
-}
-
-.cell {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border: 1px solid #aaa;
-  margin-right: -1px;
-  margin-bottom: -1px;
-}
-
-.cell:nth-child(3n) {
-  margin-right: 0;
-}
-.cell:nth-child(27n) {
-  margin-bottom: 0;
-}
-.cell-move {
+.flip-list-move {
   transition: transform 1s;
 }
 </style>

@@ -1,28 +1,22 @@
 <template>
   <div class="TabsBar">
-    <!-- <button @click="shuffle">shuffle</button> -->
     <div class="tabs_bar">
       <b-tabs content-class="mt-3" align="center" pills>
-        <b-tab title="Web">
-          <UnfinishedBoard :title="'Unfinished'" :ironmanData="webCampInfo" />
-          <FinishBoard :title="'Finish'" :ironmanData="webCampInfo" />
+        <b-tab @click="sortWebData" title="Web">
+          <UnfinishedBoard :title="'Unfinished'" :ironmanData="webData" />
+          <FinishBoard :title="'Finish'" :ironmanData="webData" />
         </b-tab>
-        <b-tab title="Backend">
-          <UnfinishedBoard
-            :title="'Unfinished'"
-            :ironmanData="backendCampInfo" />
-          <FinishBoard :title="'Finish'" :ironmanData="backendCampInfo"
+        <b-tab @click="sortBackendData" title="Backend">
+          <UnfinishedBoard :title="'Unfinished'" :ironmanData="backendData" />
+          <FinishBoard :title="'Finish'" :ironmanData="backendData"
         /></b-tab>
-        <b-tab title="iOS">
-          <UnfinishedBoard :title="'Unfinished'" :ironmanData="iOSCampInfo" />
-          <FinishBoard :title="'Finish'" :ironmanData="iOSCampInfo"
+        <b-tab @click="sortIOSData" title="iOS">
+          <UnfinishedBoard :title="'Unfinished'" :ironmanData="iOSData" />
+          <FinishBoard :title="'Finish'" :ironmanData="iOSData"
         /></b-tab>
-        <b-tab title="Android">
-          <UnfinishedBoard
-            :title="'Unfinished'"
-            :ironmanData="androidCampInfo"
-          />
-          <FinishBoard :title="'Finish'" :ironmanData="androidCampInfo" />
+        <b-tab @click="sortAndroidData" title="Android">
+          <UnfinishedBoard :title="'Unfinished'" :ironmanData="androidData" />
+          <FinishBoard :title="'Finish'" :ironmanData="androidData" />
         </b-tab>
       </b-tabs>
     </div>
@@ -40,13 +34,18 @@ export default {
   },
   data() {
     return {
-      items: [],
+      webData: [],
+      backendData: [],
+      iOSData: [],
+      androidData: [],
     };
   },
+  mounted() {
+    this.webData = this.webCampInfo;
+    this.backendData = this.backendCampInfo;
+    this.iOSData = this.iOSCampInfo;
+  },
   computed: {
-    contestantInfo() {
-      return this.$store.getters.contestantInfo;
-    },
     webCampInfo() {
       return this.$store.getters.webCampInfo;
     },
@@ -58,6 +57,20 @@ export default {
     },
     androidCampInfo() {
       return this.$store.getters.androidCampInfo;
+    },
+  },
+  methods: {
+    sortWebData() {
+      this.webData = this.webCampInfo.sort(() => Math.random() - 0.5);
+    },
+    sortBackendData() {
+      this.backendData = this.backendCampInfo.sort(() => Math.random() - 0.5);
+    },
+    sortIOSData() {
+      this.iOSData = this.iOSCampInfo.sort(() => Math.random() - 0.5);
+    },
+    sortAndroidData() {
+      this.androidData = this.androidCampInfo.sort(() => Math.random() - 0.5);
     },
   },
 };
