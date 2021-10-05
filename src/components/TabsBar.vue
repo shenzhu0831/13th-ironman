@@ -58,7 +58,7 @@ export default {
     this.iOSData = this.iOSCampInfo;
 
     dayjs.extend(isSameOrAfter);
-    this.showFirework = dayjs().isSameOrAfter("2021-10-16", "day");
+    this.showFirework = dayjs().isSameOrAfter("2021-10-17", "day");
   },
   computed: {
     webCampInfo() {
