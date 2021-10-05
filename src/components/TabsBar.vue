@@ -30,6 +30,7 @@
 </template>
 <script>
 import dayjs from "dayjs";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 
 import FinishBoard from "@/components/FinishBoard.vue";
 import UnfinishedBoard from "@/components/UnfinishedBoard.vue";
@@ -55,7 +56,9 @@ export default {
     this.webData = this.webCampInfo;
     this.backendData = this.backendCampInfo;
     this.iOSData = this.iOSCampInfo;
-    this.showFirework = dayjs().isSame("2021-10-17", "day");
+
+    dayjs.extend(isSameOrAfter);
+    this.showFirework = dayjs().isSameOrAfter("2021-10-16", "day");
   },
   computed: {
     webCampInfo() {
