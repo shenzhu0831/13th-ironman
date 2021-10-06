@@ -2,21 +2,53 @@
   <div class="TabsBar">
     <div class="tabs_bar">
       <b-tabs content-class="mt-3" align="center" pills>
-        <b-tab @click="sortWebData" title="Web">
-          <UnfinishedBoard :title="'Unfinished'" :ironmanData="webData" />
-          <FinishBoard :title="'Finish'" :ironmanData="webData" />
+        <b-tab @click="sortData('web')" title="Web">
+          <StatusBoard :title="'Unfinished'">
+            <div v-for="item in webData" :key="item.name">
+              <TaskCard v-if="!checkPostTime(item.time)" :memberInfo="item" />
+            </div>
+          </StatusBoard>
+          <StatusBoard :title="'Finished'">
+            <div v-for="item in webData" :key="item.name">
+              <TaskCard v-if="checkPostTime(item.time)" :memberInfo="item" />
+            </div>
+          </StatusBoard>
         </b-tab>
-        <b-tab @click="sortBackendData" title="Backend">
-          <UnfinishedBoard :title="'Unfinished'" :ironmanData="backendData" />
-          <FinishBoard :title="'Finish'" :ironmanData="backendData"
-        /></b-tab>
-        <b-tab @click="sortIOSData" title="iOS">
-          <UnfinishedBoard :title="'Unfinished'" :ironmanData="iOSData" />
-          <FinishBoard :title="'Finish'" :ironmanData="iOSData"
-        /></b-tab>
-        <b-tab @click="sortAndroidData" title="Android">
-          <UnfinishedBoard :title="'Unfinished'" :ironmanData="androidData" />
-          <FinishBoard :title="'Finish'" :ironmanData="androidData" />
+        <b-tab @click="sortData('backend')" title="Backend">
+          <StatusBoard :title="'Unfinished'">
+            <div v-for="item in backendData" :key="item.name">
+              <TaskCard v-if="!checkPostTime(item.time)" :memberInfo="item" />
+            </div>
+          </StatusBoard>
+          <StatusBoard :title="'Finished'">
+            <div v-for="item in backendData" :key="item.name">
+              <TaskCard v-if="checkPostTime(item.time)" :memberInfo="item" />
+            </div>
+          </StatusBoard>
+        </b-tab>
+        <b-tab @click="sortData('ios')" title="iOS">
+          <StatusBoard :title="'Unfinished'">
+            <div v-for="item in iOSData" :key="item.name">
+              <TaskCard v-if="!checkPostTime(item.time)" :memberInfo="item" />
+            </div>
+          </StatusBoard>
+          <StatusBoard :title="'Finished'">
+            <div v-for="item in iOSData" :key="item.name">
+              <TaskCard v-if="checkPostTime(item.time)" :memberInfo="item" />
+            </div>
+          </StatusBoard>
+        </b-tab>
+        <b-tab @click="sortData('android')" title="Android">
+          <StatusBoard :title="'Unfinished'">
+            <div v-for="item in androidData" :key="item.name">
+              <TaskCard v-if="!checkPostTime(item.time)" :memberInfo="item" />
+            </div>
+          </StatusBoard>
+          <StatusBoard :title="'Finished'">
+            <div v-for="item in androidData" :key="item.name">
+              <TaskCard v-if="checkPostTime(item.time)" :memberInfo="item" />
+            </div>
+          </StatusBoard>
         </b-tab>
         <div class="animation_control">
           <Firework v-if="showFirework" />
@@ -30,17 +62,18 @@
 </template>
 <script>
 import dayjs from "dayjs";
+import isToday from "dayjs/plugin/isToday";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 
-import FinishBoard from "@/components/FinishBoard.vue";
-import UnfinishedBoard from "@/components/UnfinishedBoard.vue";
+import StatusBoard from "@/components/StatusBoard.vue";
+import TaskCard from "@/components/TaskCard.vue";
 import Firework from "@/components/Firework.vue";
 
 export default {
   name: "TabsBar",
   components: {
-    FinishBoard,
-    UnfinishedBoard,
+    StatusBoard,
+    TaskCard,
     Firework,
   },
   data() {
@@ -56,6 +89,7 @@ export default {
     this.webData = this.webCampInfo;
     this.backendData = this.backendCampInfo;
     this.iOSData = this.iOSCampInfo;
+    this.androidData = this.androidCampInfo;
 
     dayjs.extend(isSameOrAfter);
     this.showFirework = dayjs().isSameOrAfter("2021-10-17", "day");
@@ -75,17 +109,31 @@ export default {
     },
   },
   methods: {
-    sortWebData() {
-      this.webData = this.webCampInfo.sort(() => Math.random() - 0.5);
+    sortData(type) {
+      switch (type) {
+        case "web":
+          this.webData = this.webCampInfo.sort(() => Math.random() - 0.5);
+          break;
+        case "backend":
+          this.backendData = this.backendCampInfo.sort(
+            () => Math.random() - 0.5
+          );
+          break;
+        case "ios":
+          this.iOSData = this.iOSCampInfo.sort(() => Math.random() - 0.5);
+          break;
+        case "android":
+          this.androidData = this.androidCampInfo.sort(
+            () => Math.random() - 0.5
+          );
+          break;
+      }
     },
-    sortBackendData() {
-      this.backendData = this.backendCampInfo.sort(() => Math.random() - 0.5);
-    },
-    sortIOSData() {
-      this.iOSData = this.iOSCampInfo.sort(() => Math.random() - 0.5);
-    },
-    sortAndroidData() {
-      this.androidData = this.androidCampInfo.sort(() => Math.random() - 0.5);
+    checkPostTime(time) {
+      const now = dayjs();
+      dayjs.extend(isToday);
+      const donePost = dayjs(time).isToday(now, "day");
+      return donePost;
     },
   },
 };
@@ -115,6 +163,10 @@ export default {
   &:hover {
     color: #fff;
   }
+}
+
+.flip-list-move {
+  transition: transform 1s;
 }
 
 .animation_control {
