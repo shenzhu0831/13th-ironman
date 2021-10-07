@@ -41,7 +41,7 @@ export default {
   margin-bottom: 16px;
   border-radius: 10px;
   box-shadow: 3px 3px 5px 0 rgba($color: #808080, $alpha: 0.3);
-  background-color: red;
+  background-color: #fff;
   @include media(md) {
     display: flex;
     gap: 16px;

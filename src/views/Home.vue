@@ -189,7 +189,7 @@ export default {
 }
 
 ::v-deep .TaskCard {
-  background-color: var(--color-background);
+  background-color: blue;
 }
 
 ::v-deep .member_name {
