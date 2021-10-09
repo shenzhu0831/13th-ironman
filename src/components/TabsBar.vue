@@ -5,48 +5,48 @@
         <b-tab @click="sortData('web')" title="Web">
           <StatusBoard :title="'Unfinished'">
             <div v-for="item in webData" :key="item.name">
-              <TaskCard v-if="!checkPostTime(item.time)" :memberInfo="item" />
+              <TaskCard v-if="!isPosted(item.time)" :memberInfo="item" />
             </div>
           </StatusBoard>
           <StatusBoard :title="'Finished'">
             <div v-for="item in webData" :key="item.name">
-              <TaskCard v-if="checkPostTime(item.time)" :memberInfo="item" />
+              <TaskCard v-if="isPosted(item.time)" :memberInfo="item" />
             </div>
           </StatusBoard>
         </b-tab>
         <b-tab @click="sortData('backend')" title="Backend">
           <StatusBoard :title="'Unfinished'">
             <div v-for="item in backendData" :key="item.name">
-              <TaskCard v-if="!checkPostTime(item.time)" :memberInfo="item" />
+              <TaskCard v-if="!isPosted(item.time)" :memberInfo="item" />
             </div>
           </StatusBoard>
           <StatusBoard :title="'Finished'">
             <div v-for="item in backendData" :key="item.name">
-              <TaskCard v-if="checkPostTime(item.time)" :memberInfo="item" />
+              <TaskCard v-if="isPosted(item.time)" :memberInfo="item" />
             </div>
           </StatusBoard>
         </b-tab>
         <b-tab @click="sortData('ios')" title="iOS">
           <StatusBoard :title="'Unfinished'">
             <div v-for="item in iOSData" :key="item.name">
-              <TaskCard v-if="!checkPostTime(item.time)" :memberInfo="item" />
+              <TaskCard v-if="!isPosted(item.time)" :memberInfo="item" />
             </div>
           </StatusBoard>
           <StatusBoard :title="'Finished'">
             <div v-for="item in iOSData" :key="item.name">
-              <TaskCard v-if="checkPostTime(item.time)" :memberInfo="item" />
+              <TaskCard v-if="isPosted(item.time)" :memberInfo="item" />
             </div>
           </StatusBoard>
         </b-tab>
         <b-tab @click="sortData('android')" title="Android">
           <StatusBoard :title="'Unfinished'">
             <div v-for="item in androidData" :key="item.name">
-              <TaskCard v-if="!checkPostTime(item.time)" :memberInfo="item" />
+              <TaskCard v-if="!isPosted(item.time)" :memberInfo="item" />
             </div>
           </StatusBoard>
           <StatusBoard :title="'Finished'">
             <div v-for="item in androidData" :key="item.name">
-              <TaskCard v-if="checkPostTime(item.time)" :memberInfo="item" />
+              <TaskCard v-if="isPosted(item.time)" :memberInfo="item" />
             </div>
           </StatusBoard>
         </b-tab>
@@ -129,7 +129,7 @@ export default {
           break;
       }
     },
-    checkPostTime(time) {
+    isPosted(time) {
       const now = dayjs();
       dayjs.extend(isToday);
       const donePost = dayjs(time).isToday(now, "day");
