@@ -7,38 +7,22 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     contestantInfo: [],
-    webCampInfo: [],
-    backendCampInfo: [],
-    iOSCampInfo: [],
-    androidCampInfo: [],
   },
   getters: {
     contestantInfo(state) {
       return state.contestantInfo;
     },
     webCampInfo(state) {
-      state.webCampInfo = state.contestantInfo.filter(
-        (info) => info.camp === "Web"
-      );
-      return state.webCampInfo;
+      return state.contestantInfo.filter((info) => info.camp === "Web");
     },
     backendCampInfo(state) {
-      state.backendCampInfo = state.contestantInfo.filter(
-        (info) => info.camp === "Backend"
-      );
-      return state.backendCampInfo;
+      return state.contestantInfo.filter((info) => info.camp === "Backend");
     },
     iOSCampInfo(state) {
-      state.iOSCampInfo = state.contestantInfo.filter(
-        (info) => info.camp === "iOS"
-      );
-      return state.iOSCampInfo;
+      return state.contestantInfo.filter((info) => info.camp === "iOS");
     },
     androidCampInfo(state) {
-      state.androidCampInfo = state.contestantInfo.filter(
-        (info) => info.camp === "Android"
-      );
-      return state.androidCampInfo;
+      return state.contestantInfo.filter((info) => info.camp === "Android");
     },
   },
   mutations: {
