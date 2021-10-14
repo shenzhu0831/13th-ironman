@@ -92,7 +92,7 @@ export default {
     this.androidData = this.androidCampInfo;
 
     dayjs.extend(isSameOrAfter);
-    this.showFirework = dayjs().isSameOrAfter("2021-10-17", "day");
+    this.showFirework = dayjs().isSameOrAfter("2021-10-16", "day");
   },
   computed: {
     webCampInfo() {
