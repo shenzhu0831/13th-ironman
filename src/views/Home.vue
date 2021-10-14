@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       deadline: "",
-      userTheme: "light_theme",
+      userTheme: Cookies.get("user-theme") ?? "light_theme",
     };
   },
   created() {
@@ -81,7 +81,6 @@ export default {
               ${60 - secDiff} 秒`;
     },
     setTheme(theme) {
-      Cookies.set("user-theme", theme);
       this.userTheme = theme;
       document.documentElement.className = theme;
     },
@@ -92,6 +91,7 @@ export default {
       } else {
         this.setTheme("light_theme");
       }
+      Cookies.set("user-theme", this.userTheme);
     },
   },
 };
