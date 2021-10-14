@@ -102,10 +102,13 @@ export default {
   left: 0;
   right: 0;
   font-family: sans-serif;
-  font-size: 52px;
+  font-size: 30px;
   font-weight: 800;
   margin: auto;
   letter-spacing: 5px;
+  @include media(md) {
+    font-size: 52px;
+  }
 }
 
 .fireworks_group {
