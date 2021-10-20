@@ -51,8 +51,11 @@
           </StatusBoard>
         </b-tab>
         <div class="animation_control">
-          <Firework v-if="showFirework" />
-          <button @click="showFirework = true" class="firework_button">
+          <Firework
+            v-if="isShowFirework"
+            @closeFirework="isShowFirework = $event"
+          />
+          <button @click="isShowFirework = true" class="firework_button">
             Firework
           </button>
         </div>
@@ -82,7 +85,7 @@ export default {
       backendData: [],
       iOSData: [],
       androidData: [],
-      showFirework: false,
+      isShowFirework: false,
     };
   },
   mounted() {
@@ -92,7 +95,7 @@ export default {
     this.androidData = this.androidCampInfo;
 
     dayjs.extend(isSameOrAfter);
-    this.showFirework = dayjs().isSameOrAfter("2021-10-16", "day");
+    this.isShowFirework = dayjs().isSameOrAfter("2021-10-16", "day");
   },
   computed: {
     webCampInfo() {

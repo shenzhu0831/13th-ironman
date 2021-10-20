@@ -1,5 +1,11 @@
 <template>
   <div class="Firework">
+    <button
+      @click="$emit('closeFirework', ($event = false))"
+      class="firework_button"
+    >
+      Close
+    </button>
     <p class="congratulations">Congratulations!!</p>
     <div class="fireworks_group">
       <div class="firework">
@@ -77,7 +83,7 @@
 </template>
 <script>
 export default {
-  name: "",
+  name: "Firework",
   data() {
     return {};
   },
@@ -264,5 +270,15 @@ export default {
   100% {
     transform: translateY(70px);
   }
+}
+
+.firework_button {
+  margin: 16px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #7dd69c;
+  box-shadow: 1px 1px 3px 0 rgba($color: #808080, $alpha: 0.3);
+  color: #fff;
 }
 </style>
