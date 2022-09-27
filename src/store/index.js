@@ -33,7 +33,7 @@ export default new Vuex.Store({
   actions: {
     async getContestantInfo({ commit }) {
       await axios
-        .get("/api/team/249/members")
+        .get("http://54.250.146.224:3000/team/249/members")
         .then((res) => commit("contestantInfo", res.data.data));
     },
   },

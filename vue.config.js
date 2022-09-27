@@ -20,16 +20,17 @@ module.exports = {
       .use("vue-svg-loader")
       .loader("vue-svg-loader");
   },
-  devServer: {
-    proxy: {
-      "/api": {
-        target: "http://54.250.146.224:3000/",
-        pathRewrite: {
-          "^/api": "",
-        },
-        changeOrigin: true,
-        ws: true,
-      },
-    },
-  },
+  // 處理後端主機與本地跨域產生 CORS 問題
+  // devServer: {
+  //   proxy: {
+  //     "/api": {
+  //       target: "http://54.250.146.224:3000/",
+  //       pathRewrite: {
+  //         "^/api": "",
+  //       },
+  //       changeOrigin: true,
+  //       ws: true,
+  //     },
+  //   },
+  // },
 };
