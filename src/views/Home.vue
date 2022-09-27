@@ -6,7 +6,16 @@
       </h1>
       <div class="web_info">
         <h2 class="title">
-          <span>第13屆IT邦幫忙鐵人賽</span> <span>好想工作室v5.0</span>
+          <span>2022 IT邦幫忙鐵人賽</span>
+          <div class="animation_control">
+            <Firework
+              v-if="isShowFirework"
+              @closeFirework="isShowFirework = $event"
+            />
+            <button @click="isShowFirework = true" class="firework_button">
+              Firework
+            </button>
+          </div>
         </h2>
         <div class="toolbar">
           <div class="competing_time">
@@ -28,7 +37,7 @@
       </div>
     </div>
     <main class="main">
-      <TabsBar />
+      <InformationBoard />
     </main>
   </div>
 </template>
@@ -39,26 +48,26 @@ import Cookies from "js-cookie";
 import SunIcon from "@/assets/image/icon/sun.svg";
 import MoonIcon from "@/assets/image/icon/moon.svg";
 
-import TabsBar from "@/components/TabsBar.vue";
+import InformationBoard from "@/components/InformationBoard.vue";
+import Firework from "@/components/Firework.vue";
 export default {
   name: "Home",
   components: {
     SunIcon,
     MoonIcon,
-    TabsBar,
+    InformationBoard,
+    Firework,
   },
   data() {
     return {
       deadline: "",
+      isShowFirework: false,
       userTheme: Cookies.get("user-theme") ?? "light_theme",
     };
   },
   created() {
     this.deadline = this.getCountdownTime();
-    setInterval(() => {
-      // 每秒執行一次
-      this.deadline = this.getCountdownTime();
-    }, 1000);
+    window.requestAnimationFrame(this.getCountdownTime);
   },
   mounted() {
     const initUserTheme = this.userTheme;
@@ -66,7 +75,7 @@ export default {
   },
   methods: {
     getCountdownTime() {
-      const deadline = dayjs("2021-10-16 00:00:00");
+      const deadline = dayjs("2022-10-16 00:00:00");
       const now = dayjs();
 
       let dayDiff = deadline.diff(now, "day");
@@ -74,11 +83,13 @@ export default {
       let minDiff = now.format("mm");
       let secDiff = now.format("ss");
 
-      return `比賽倒數： 
+      this.deadline = `比賽倒數： 
               ${dayDiff} 天 
               ${24 - hoursDiff} 時
               ${60 - minDiff} 分
               ${60 - secDiff} 秒`;
+      //利用 callback 不斷呼叫 window.requestAnimationFrame api
+      window.requestAnimationFrame(this.getCountdownTime);
     },
     setTheme(theme) {
       this.userTheme = theme;
@@ -97,6 +108,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.home {
+  position: relative;
+}
 .header {
   padding: 30px 16px;
   display: flex;
@@ -122,13 +136,12 @@ export default {
   }
   .title {
     margin: 0;
+    display: flex;
     font-size: 20px;
     span {
       &:first-of-type {
+        flex: 2 0 0;
         color: #63677f;
-      }
-      &:last-of-type {
-        color: #7dd69c;
       }
     }
   }
@@ -140,15 +153,14 @@ export default {
   gap: 16px;
   align-items: center;
   .competing_time {
-    width: 100%;
-    padding: 5px;
+    min-width: 270px;
+    margin-top: 8px;
     text-align: center;
-    background-color: #7dd69c;
     .counter {
       font-size: 16px;
       font-weight: 600;
       letter-spacing: 1px;
-      color: #fff;
+      color: #7dd69c;
     }
   }
   .theme_checkbox {
@@ -170,6 +182,24 @@ export default {
     }
   }
 }
+
+.animation_control {
+  flex: 1 0 0;
+  .firework_button {
+    width: 100%;
+    display: block;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #7dd69c;
+    box-shadow: 1px 1px 3px 0 rgba($color: #808080, $alpha: 0.3);
+    color: #fff;
+  }
+}
+
+.main {
+  padding: 1rem;
+}
 </style>
 <style lang="css" scoped>
 ::v-deep .header .title span:first-of-type {
@@ -178,6 +208,10 @@ export default {
 
 ::v-deep .tab-content {
   background-color: var(--tab-content);
+}
+
+::v-deep .information_board_title {
+  background-color: var(--color-background);
 }
 
 ::v-deep .FinishBoard h3 {

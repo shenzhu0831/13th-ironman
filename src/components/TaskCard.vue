@@ -1,26 +1,40 @@
 <template>
   <div class="TaskCard">
     <div class="avatar">
-      <img :src="memberInfo.image" alt="avatar" />
+      <img :src="memberInfo.originalAuthorImageUrl" alt="avatar" />
     </div>
     <div class="member_info">
       <div class="member_post">
-        <p class="member_name">{{ memberInfo.name }}</p>
-        <p class="member_theme">{{ memberInfo.theme }}</p>
-        <a class="member_title" :href="memberInfo.href" target="_blank">
-          {{ memberInfo.title }}
+        <p class="member_name">{{ memberInfo.authorName }}</p>
+        <a
+          class="member_theme"
+          :href="memberInfo.ironmanPageUrl"
+          target="_blank"
+        >
+          {{ memberInfo.seriesTitle }}
+        </a>
+        <a
+          class="member_title"
+          :href="memberInfo.latestPostUrl"
+          target="_blank"
+        >
+          {{ memberInfo.latestPostTitle }}
         </a>
       </div>
       <div class="post_info">
-        <span class="post_time">最後發文時間： {{ memberInfo.time }}</span>
+        <span class="post_time"
+          >最後發文時間： {{ formateTime(memberInfo.latestPostedAt) }}</span
+        >
         <span class="post_release">
-          累積貼文數：{{ memberInfo.releasePost }} 篇
+          累積貼文數：{{ memberInfo.postLength }} 篇
         </span>
       </div>
     </div>
   </div>
 </template>
 <script>
+import dayjs from "dayjs";
+
 export default {
   name: "TaskCard",
   props: {
@@ -31,6 +45,11 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    formateTime(postTime) {
+      return dayjs(postTime).format("YYYY/MM/DD HH:mm:ss");
+    },
   },
 };
 </script>
@@ -79,6 +98,7 @@ export default {
     font-weight: 600;
   }
   &_theme {
+    display: block;
     font-weight: 600;
     color: #63677f;
     word-break: break-all;

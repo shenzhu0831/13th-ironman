@@ -25,6 +25,7 @@ export default {
 .StatusBoard {
   flex: 1 0 0;
   h3 {
+    margin-top: 1rem;
     color: #63677f;
   }
 }

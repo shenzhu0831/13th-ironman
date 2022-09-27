@@ -33,8 +33,8 @@ export default new Vuex.Store({
   actions: {
     async getContestantInfo({ commit }) {
       await axios
-        .get("https://ithelp-hao-siang-v5-cheerio.herokuapp.com/lastPost")
-        .then((res) => commit("contestantInfo", res.data));
+        .get("/api/team/249/members")
+        .then((res) => commit("contestantInfo", res.data.data));
     },
   },
   modules: {},

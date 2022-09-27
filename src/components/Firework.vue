@@ -96,6 +96,7 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 10;
   background-color: rgba($color: #18202a, $alpha: 0.8);
   overflow: hidden;
 }

@@ -20,4 +20,16 @@ module.exports = {
       .use("vue-svg-loader")
       .loader("vue-svg-loader");
   },
+  devServer: {
+    proxy: {
+      "/api": {
+        target: "http://54.250.146.224:3000/",
+        pathRewrite: {
+          "^/api": "",
+        },
+        changeOrigin: true,
+        ws: true,
+      },
+    },
+  },
 };
