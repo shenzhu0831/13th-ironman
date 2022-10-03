@@ -33,7 +33,9 @@ export default new Vuex.Store({
   actions: {
     async getContestantInfo({ commit }) {
       await axios
-        .get("http://54.250.146.224:3000/team/249/members")
+        .get(
+          "https://ithome-ironman-team-watcher.s3.ap-northeast-1.amazonaws.com/2022/team-249.json"
+        )
         .then((res) => commit("contestantInfo", res.data.data));
     },
   },
